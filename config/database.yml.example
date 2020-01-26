@@ -9,6 +9,7 @@ default: &default
 
 development:
   <<: *default
+  host: ''
   database: decart_test_api_development
 
 test:
