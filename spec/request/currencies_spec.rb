@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Currencies API', type: :request do
+  let(:user) { create(:user) }
   let!(:currencies) { create_list(:currency, 2) }
   let(:currency_id) { currencies.first.id }
+  let(:headers) { valid_headers }
 
   # GET /currencies
   describe 'GET /currencies' do
-    before { get '/currencies' }
+    before { get '/currencies', params: {}, headers: headers }
 
     it 'returns currencies' do
       expect(json).not_to be_empty
@@ -20,7 +22,7 @@ RSpec.describe 'Currencies API', type: :request do
 
   # GET /currencies/:id
   describe 'GET /currencies/:id' do
-    before { get "/currencies/#{currency_id}" }
+    before { get "/currencies/#{currency_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the currency' do
