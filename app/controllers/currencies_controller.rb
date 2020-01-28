@@ -3,7 +3,7 @@ class CurrenciesController < ApplicationController
 
   # GET /currencies
   def index
-    @currencies = Currency.all
+    @currencies = Currency.page(params[:page])
     json_response(@currencies)
   end
 
