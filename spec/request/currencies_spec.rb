@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Currencies API', type: :request do
   let(:user) { create(:user) }
   let!(:currencies) { create_list(:currency, 2) }
-  let(:currency_id) { currencies.first.id }
+  let(:currency_id) { currencies.first.id.to_s }
   let(:headers) { valid_headers }
 
   # GET /currencies
@@ -27,7 +27,7 @@ RSpec.describe 'Currencies API', type: :request do
     context 'when the record exists' do
       it 'returns the currency' do
         expect(json).not_to be_empty
-        expect(json['id']).to eq(currency_id)
+        expect(json['data']['id']).to eq(currency_id)
       end
 
       it 'returns status code 200' do
